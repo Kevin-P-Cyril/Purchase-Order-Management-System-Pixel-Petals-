@@ -1,0 +1,2163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PixelPetals Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js">
+// DOM-based PO status update and view (no storage or API)
+function adminSetStatus(poNumber, status) {
+    const statusDiv = document.getElementById('poStatusStore');
+    statusDiv.setAttribute('data-po', poNumber);
+    statusDiv.setAttribute('data-status', status);
+    alert(`Admin: PO ${poNumber} status set to ${status}`);
+}
+
+function userGetStatus(poNumber) {
+    const statusDiv = document.getElementById('poStatusStore');
+    if (statusDiv.getAttribute('data-po') === poNumber) {
+        alert(`User: Status of PO ${poNumber} is ${statusDiv.getAttribute('data-status')}`);
+    } else {
+        alert('PO not found or status not set.');
+    }
+}
+
+</script>
+<script src="https://cdn.tailwindcss.com">
+// DOM-based PO status update and view (no storage or API)
+function adminSetStatus(poNumber, status) {
+    const statusDiv = document.getElementById('poStatusStore');
+    statusDiv.setAttribute('data-po', poNumber);
+    statusDiv.setAttribute('data-status', status);
+    alert(`Admin: PO ${poNumber} status set to ${status}`);
+}
+
+function userGetStatus(poNumber) {
+    const statusDiv = document.getElementById('poStatusStore');
+    if (statusDiv.getAttribute('data-po') === poNumber) {
+        alert(`User: Status of PO ${poNumber} is ${statusDiv.getAttribute('data-status')}`);
+    } else {
+        alert('PO not found or status not set.');
+    }
+}
+
+</script>
+<script src="https://unpkg.com/lucide@latest">
+// DOM-based PO status update and view (no storage or API)
+function adminSetStatus(poNumber, status) {
+    const statusDiv = document.getElementById('poStatusStore');
+    statusDiv.setAttribute('data-po', poNumber);
+    statusDiv.setAttribute('data-status', status);
+    alert(`Admin: PO ${poNumber} status set to ${status}`);
+}
+
+function userGetStatus(poNumber) {
+    const statusDiv = document.getElementById('poStatusStore');
+    if (statusDiv.getAttribute('data-po') === poNumber) {
+        alert(`User: Status of PO ${poNumber} is ${statusDiv.getAttribute('data-status')}`);
+    } else {
+        alert('PO not found or status not set.');
+    }
+}
+
+</script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body.login-page {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: url('WhatsApp Image 2025-05-07 at 21.31.07_990452f2.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display:flex;
+            align-items: center;
+            justify-items: center;
+            height: 100vh;
+            padding: 25px;
+        }
+
+        .container {
+            width: 0.50%;
+            max-width: 0.10px;
+            padding: 1rem;
+            margin: 0 auto;
+            display:block;
+            text-align: center;
+            border-radius: 16px;
+            background: rgba(150, 150, 142, 0.493);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,255);
+            color: rgba(15, 5, 5, 0.63);
+        }
+
+        @media (min-width: 250px) {
+            .container {
+                max-width: 350px !important;
+            }
+        }
+
+        .tab-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.2rem;
+        }
+
+        .tab-buttons button {
+            flex: 1;
+            margin: 0 5px;
+            padding: 8px;
+            background: rgba(15, 1, 1, 0.664);
+            color: rgba(248, 244, 244, 0.719);
+            border: black;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .tab-buttons button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .tab-content input {
+            width: 75%;
+            padding: 10px;
+            margin: 8px 0;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            color: rgba(10, 3, 3, 0.678);
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        input::placeholder {
+            color: rgba(10, 4, 4, 0.75);
+        }
+
+        .submit-btn {
+            width: 50%;
+            padding: 10px;
+            background: rgba(12, 3, 3, 0.555);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-top: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .error {
+            color: #ff6b6b;
+            font-size: 0.85em;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .title {
+            color: #03040a65;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .time {
+            font-size: 0.9rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #222;
+            background-color: rgba(255,255,255,0.3);
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        /* Scoped Dashboard Styles */
+        #dashboardWrapper {
+            all: initial;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100vh;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body.dashboard {
+            background-color: #f4f6f8;
+            color: #1e1e1e;
+        }
+
+        .layout {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 240px;
+            background-color: #1e1e2f;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .sidebar nav {
+            flex: 1;
+        }
+
+        .sidebar nav a, .logout {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .sidebar nav a:hover, .sidebar nav a.active, .logout:hover {
+            background-color: #2e2e48;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .card.large {
+            width: 100%;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .dropdown {
+            margin-bottom: 10px;
+        }
+
+        .dropdown-content {
+            margin-left: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dropdown-content a {
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #2e2e48;
+            color: white;
+        }
+
+        form {
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 400px;
+        }
+
+        form input, form button, select {
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4a6cf7;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #375ee0;
+        }
+
+        ul#productList {
+            margin-top: 10px;
+            list-style: none;
+        }
+
+        ul#productList li {
+            background: #fff;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-left: 4px solid #4a6cf7;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .actions input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .customer-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .customer-table th, .customer-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .customer-table th {
+            background-color: #f7f8fc;
+            font-weight: bold;
+        }
+
+        /* POMS specific styles */
+        .form-section {
+            transition: all 0.3s ease;
+        }
+        .form-section.collapsed {
+            max-height: 60px;
+            overflow: hidden;
+        }
+        .part-item {
+            transition: all 0.3s ease;
+        }
+        .part-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .chip-input {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            padding: 4px;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            min-height: 42px;
+        }
+        .chip {
+            background-color: #e5e7eb;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+        .chip button {
+            margin-left: 4px;
+            color: #6b7280;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        #partItemsContainer {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .required-field::after {
+            content: "*";
+            color: #ef4444;
+            margin-left: 2px;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* About section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .about-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        .about-card h3 {
+            margin-bottom: 1rem;
+            color: #4a6cf7;
+        }
+        .team-member {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .team-member img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            object-fit: cover;
+        }
+
+        /* Status badges */
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .status-draft {
+            background-color: #e5e7eb;
+            color: #4b5563;
+        }
+        .status-submitted {
+            background-color: #93c5fd;
+            color: #1e40af;
+        }
+        .status-approved {
+            background-color: #a7f3d0;
+            color: #065f46;
+        }
+        .status-received {
+            background-color: #c7d2fe;
+            color: #3730a3;
+        }
+        .status-cancelled {
+            background-color: #fca5a5;
+            color: #991b1b;
+        }
+        .status-pending {
+            background-color: #fde68a;
+            color: #92400e;
+        }
+    </style>
+</head>
+<body class="login-page">
+<div class="container">
+<h2 class="title">Welcome</h2>
+<div class="time" id="currentTime"></div>
+<div class="tab-buttons">
+<button onclick="showTab('user')">User</button>
+<button onclick="showTab('admin')">Admin</button>
+</div>
+<!-- USER LOGIN -->
+<div class="tab-content" id="userTab">
+<h2>User Login</h2>
+<div class="error" id="userError"></div>
+<input id="userUsername" placeholder="Username" type="text"/>
+<input id="userPassword" placeholder="Password" type="password"/>
+<input id="userConfirmPassword" placeholder="Confirm Password" type="password"/>
+<input id="userCompany" placeholder="Company Name" type="text"/>
+<button class="submit-btn" onclick="validateUserLogin()">Login</button>
+</div>
+<!-- ADMIN LOGIN -->
+<div class="tab-content" id="adminTab">
+<h2>Admin Login</h2>
+<div class="error" id="adminError"></div>
+<input id="adminName" placeholder="Admin Name" type="text"/>
+<input id="adminId" placeholder="Admin ID" type="text"/>
+<input id="adminPassword" placeholder="Password" type="password"/>
+<input id="adminConfirmPassword" placeholder="Confirm Password" type="password"/>
+<input id="adminCompany" placeholder="Company Name" type="text"/>
+<button class="submit-btn" onclick="validateAdminLogin()">Login</button>
+</div>
+</div>
+<!-- Dashboard Section -->
+<div id="dashboardWrapper" style="display:none;">
+
+<!-- Shared PO status holder (DOM-based communication) -->
+<div id="poStatusStore" data-po="PO-2023-001" data-status="draft" style="display:none;"></div>
+
+<div class="layout">
+<aside class="sidebar">
+<h2 class="logo">PixelPetals<br/><small id="roleLabel" style="font-size: 0.8rem; color: #aaa;"></small></h2>
+<nav>
+<a class="active" onclick="showSection('dashboard')"><i data-lucide="home"></i> Home</a>
+<div class="dropdown">
+<div class="dropdown-toggle" onclick="toggleDropdown(this)">
+<i data-lucide="package"></i> Inventory <span class="arrow">▾</span>
+</div>
+<div class="dropdown-content hidden border border-gray-300 rounded bg-[#2e2e48] p-1">
+<a onclick="showInventorySection('add')">Add New Product</a>
+<a onclick="showInventorySection('list')">Product List</a>
+<a onclick="showInventorySection('update')">Update Product</a>
+</div>
+</div>
+<div class="dropdown">
+<div class="dropdown-toggle" onclick="toggleDropdown(this)">
+<i data-lucide="shopping-bag"></i> POMS <span class="arrow">▾</span>
+</div>
+<div class="dropdown-content hidden border border-gray-300 rounded bg-[#2e2e48] p-1">
+<a onclick="showPOMSSection('basic')">Basic Info</a>
+<a onclick="showPOMSSection('parts')">Parts</a>
+<a onclick="showPOMSSection('terms')">Terms</a>
+<a onclick="showPOMSSection('review')">Review</a>
+</div>
+</div>
+<a onclick="showSection('orders')"><i data-lucide="list"></i> Orders</a>
+<a onclick="showSection('about')"><i data-lucide="info"></i> About</a>
+</nav>
+<a class="logout" onclick="logout()"><i data-lucide="log-out"></i> Log out</a>
+</aside>
+<main class="main-content">
+<!-- Dashboard Section -->
+<section id="dashboard">
+
+<div class="card mt-6">
+  <h3 class="text-lg font-semibold mb-2">PO Status Test (No API/Storage)</h3>
+  <div class="flex gap-4">
+    <button onclick="adminSetStatus('PO-2023-001', 'approved')" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Admin: Set to Approved</button>
+    <button onclick="adminSetStatus('PO-2023-001', 'cancelled')" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Admin: Set to Cancelled</button>
+    <button onclick="userGetStatus('PO-2023-001')" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">User: Check Status</button>
+  </div>
+</div>
+
+<h1>Home Dashboard</h1>
+<p>Welcome to PixelPetals Dashboard!</p>
+<div class="card large hidden" id="cashFlowCard">
+<h3>Cash Flow Overview</h3>
+<canvas height="100" id="inventoryChart"></canvas>
+</div>
+<div class="card">
+<h3>Recent Activities</h3>
+<ul class="mt-4 space-y-3">
+<li class="flex items-start">
+<span class="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100 text-blue-800">
+<i class="fas fa-box text-sm"></i>
+</span>
+<p class="ml-3 text-sm">New inventory items added (5)</p>
+</li>
+<li class="flex items-start">
+<span class="flex h-6 w-6 items-center justify-center rounded-full bg-green-100 text-green-800">
+<i class="fas fa-file-invoice-dollar text-sm"></i>
+</span>
+<p class="ml-3 text-sm">Purchase order #PO-2023-001 submitted</p>
+</li>
+<li class="flex items-start">
+<span class="flex h-6 w-6 items-center justify-center rounded-full bg-yellow-100 text-yellow-800">
+<i class="fas fa-exclamation-triangle text-sm"></i>
+</span>
+<p class="ml-3 text-sm">Low stock alert for "Semiconductor Chips"</p>
+</li>
+</ul>
+</div>
+</section>
+<!-- Inventory Section -->
+<section class="hidden" id="inventory">
+<h1>Inventory</h1>
+<div class="actions mb-4">
+  <button onclick="showInventorySection('add')">Add Product</button>
+  <button onclick="showInventorySection('update')">Update Product</button>
+  <button onclick="showInventorySection('list')">Product List</button>
+</div>
+
+<div id="inventoryAddView" class="space-y-4">
+<form id="productForm">
+<input id="productName" placeholder="Product Name" required="" type="text"/>
+<input id="productQuantity" min="1" placeholder="Quantity" required="" type="number"/>
+<input id="productCompany" placeholder="Company Name" required="" type="text"/>
+<button type="submit">Add Product</button>
+</form>
+<div class="card large mt-4">
+<h3>Inventory Levels</h3>
+<canvas height="100" id="inventoryBarChart"></canvas>
+</div>
+</div>
+<div class="hidden" id="inventoryListView">
+<ul id="productList"></ul>
+<div class="card large mt-4">
+<h3>Inventory Distribution</h3>
+<canvas height="100" id="inventoryPieChart"></canvas>
+</div>
+</div>
+<div class="hidden" id="inventoryUpdateView">
+<form id="updateProductForm">
+<select id="updateProductSelector" required=""></select>
+<input id="updateProductQuantity" min="1" placeholder="New Quantity" required="" type="number"/>
+<input id="updateProductCompany" placeholder="Company Name" required="" type="text"/>
+<button type="submit">Update</button>
+</form>
+</div>
+</section>
+<!-- POMS Section -->
+<section class="hidden" id="poms">
+<div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+<div class="px-6 py-4 border-b border-gray-200">
+<h2 class="text-xl font-semibold text-gray-800">Create New Purchase Order</h2>
+<p class="text-gray-600">Fill in the details for semiconductor procurement</p>
+</div>
+<div class="px-6 py-4">
+<div class="flex border-b border-gray-200">
+<button class="tab-btn py-2 px-4 font-medium text-blue-600 border-b-2 border-blue-600" data-tab="basic">Basic Info</button>
+<button class="tab-btn py-2 px-4 font-medium text-gray-500 hover:text-blue-600" data-tab="parts">Parts</button>
+<button class="tab-btn py-2 px-4 font-medium text-gray-500 hover:text-blue-600" data-tab="terms">Terms</button>
+<button class="tab-btn py-2 px-4 font-medium text-gray-500 hover:text-blue-600" data-tab="review">Review</button>
+</div>
+<form class="mt-6" id="poForm">
+<!-- Basic Info Tab -->
+<div class="tab-content active" id="basic">
+<div class="form-section mb-6">
+<div class="flex justify-between items-center cursor-pointer" onclick="toggleSection(this)">
+<h3 class="text-lg font-semibold text-gray-700">Purchase Order Details</h3>
+<i class="fas fa-chevron-down text-gray-500"></i>
+</div>
+<div class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700" for="poNumber">PO Number</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="poNumber" readonly="" type="text" value="PO-2023-001"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 required-field" for="poDate">PO Date</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="poDate" required="" type="date"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 required-field" for="orderType">Order Type</label>
+<select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="orderType" required="">
+<option value="">Select Order Type</option>
+<option value="standard">Standard</option>
+<option value="blanket">Blanket</option>
+<option value="consignment">Consignment</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700" for="priorityLevel">Priority Level</label>
+<select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="priorityLevel">
+<option value="standard">Standard</option>
+<option value="urgent">Urgent</option>
+<option value="low">Low</option>
+</select>
+</div>
+<div>
+<span id="poStatusWrapper"><label class="block text-sm font-medium text-gray-700" for="poStatus">PO Status</label>
+<select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="poStatus">
+<option value="draft">Draft</option>
+<option value="submitted">Submitted</option>
+<option value="approved">Approved</option>
+<option value="received">Received</option>
+<option value="cancelled">Cancelled</option>
+</select></span>
+</div>
+</div>
+</div>
+<div class="form-section mb-6">
+<div class="flex justify-between items-center cursor-pointer" onclick="toggleSection(this)">
+<h3 class="text-lg font-semibold text-gray-700">Buyer Information</h3>
+<i class="fas fa-chevron-down text-gray-500"></i>
+</div>
+<div class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 required-field" for="buyerName">Buyer Name</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="buyerName" required="" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 required-field" for="department">Department/Line/FAB</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="department" required="" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 required-field" for="buyerEmail">Email</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="buyerEmail" required="" type="email"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700" for="buyerPhone">Phone</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="buyerPhone" type="tel"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700" for="requestId">Internal Request ID</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="requestId" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 required-field" for="deliveryAddress">Delivery Address</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="deliveryAddress" required="" type="text"/>
+</div>
+</div>
+</div>
+<div class="form-section mb-6">
+<div class="flex justify-between items-center cursor-pointer" onclick="toggleSection(this)">
+<h3 class="text-lg font-semibold text-gray-700">Supplier Information</h3>
+<i class="fas fa-chevron-down text-gray-500"></i>
+</div>
+<div class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 required-field" for="supplierName">Supplier Name</label>
+<select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="supplierName" required="">
+<option value="">Select Supplier</option>
+<option value="TSMC">TSMC</option>
+<option value="Samsung">Samsung Semiconductor</option>
+<option value="Intel">Intel Foundry</option>
+<option value="GlobalFoundries">GlobalFoundries</option>
+<option value="UMC">UMC</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700" for="supplierCode">Vendor Code</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="supplierCode" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 required-field" for="contactPerson">Contact Person</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="contactPerson" required="" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 required-field" for="supplierEmail">Email</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="supplierEmail" required="" type="email"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700" for="supplierPhone">Phone</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="supplierPhone" type="tel"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 required-field" for="supplierAddress">Supplier Address</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="supplierAddress" required="" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700" for="avlStatus">AVL Status</label>
+<select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="avlStatus">
+<option value="approved">Approved</option>
+<option value="pending">Pending</option>
+<option value="not_approved">Not Approved</option>
+</select>
+</div>
+</div>
+</div>
+<div class="flex justify-end mt-6">
+<button class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" onclick="switchTab('parts')" type="button">
+                                            Next: Parts <i class="fas fa-arrow-right ml-2"></i>
+</button>
+</div>
+</div>
+<!-- Parts Tab -->
+<div class="tab-content" id="parts">
+<div class="mb-6">
+<h3 class="text-lg font-semibold text-gray-700">Semiconductor Part Details</h3>
+<p class="text-gray-600">Add all the semiconductor components for this purchase order</p>
+</div>
+<div class="space-y-4 mb-6" id="partItemsContainer">
+<!-- Part items will be added here -->
+</div>
+<div class="bg-blue-50 p-4 rounded-lg mb-6">
+<h4 class="font-medium text-blue-800 mb-2">Add New Part</h4>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 required-field" for="partNumber">Part Number/MPN</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="partNumber" required="" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 required-field" for="manufacturer">Manufacturer</label>
+<select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="manufacturer" required="">
+<option value="">Select Manufacturer</option>
+<option value="TSMC">TSMC</option>
+<option value="Samsung">Samsung</option>
+<option value="Intel">Intel</option>
+<option value="TI">Texas Instruments</option>
+<option value="NXP">NXP</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700" for="description">Description</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="description" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 required-field" for="moq">MOQ</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="moq" required="" type="number"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 required-field" for="leadTime">Lead Time (days)</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="leadTime" required="" type="number"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 required-field" for="quantity">Order Quantity</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="quantity" required="" type="number"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 required-field" for="uom">UOM</label>
+<select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="uom" required="">
+<option value="">Select Unit</option>
+<option value="pcs">Pieces</option>
+<option value="kg">Kilograms</option>
+<option value="lot">Lot</option>
+<option value="wafer">Wafer</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 required-field" for="unitPrice">Unit Price</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="unitPrice" required="" step="0.01" type="number"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 required-field" for="deliveryDate">Target Delivery Date</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="deliveryDate" required="" type="date"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700" for="batchInfo">Wafer Lot/Batch Info</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="batchInfo" type="text"/>
+</div>
+<div class="flex items-center">
+<input class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" id="rohsCompliance" type="checkbox"/>
+<label class="ml-2 block text-sm text-gray-700" for="rohsCompliance">RoHS/REACH Compliance</label>
+</div>
+</div>
+<div class="mt-4">
+<h4 class="font-medium text-blue-800 mb-2">Additional Technical Info</h4>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700" for="processNode">Process Node</label>
+<select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="processNode">
+<option value="">Select Process Node</option>
+<option value="7nm">7nm</option>
+<option value="10nm">10nm</option>
+<option value="14nm">14nm</option>
+<option value="28nm">28nm</option>
+<option value="65nm">65nm</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700" for="packagingType">Packaging Type</label>
+<select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="packagingType">
+<option value="">Select Packaging</option>
+<option value="BGA">BGA</option>
+<option value="QFN">QFN</option>
+<option value="DIP">DIP</option>
+<option value="SOP">SOP</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700" for="testSpec">Test Spec Number</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="testSpec" type="text"/>
+</div>
+<div class="col-span-3">
+<label class="block text-sm font-medium text-gray-700" for="datasheetLink">Datasheet Link</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="datasheetLink" type="url"/>
+</div>
+</div>
+</div>
+<div class="mt-4 flex justify-end">
+<button class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" id="addPartBtn" type="button">
+                                                Add Part <i class="fas fa-plus ml-2"></i>
+</button></div>
+</div>
+<div class="flex justify-between mt-6">
+<button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2" onclick="switchTab('basic')" type="button">
+<i class="fas fa-arrow-left mr-2"></i> Back
+                                        </button>
+<button class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" onclick="switchTab('terms')" type="button">
+                                            Next: Terms <i class="fas fa-arrow-right ml-2"></i>
+</button>
+</div>
+</div>
+<!-- Terms Tab -->
+<div class="tab-content" id="terms">
+<div class="mb-6">
+<h3 class="text-lg font-semibold text-gray-700">Terms &amp; Conditions</h3>
+<p class="text-gray-600">Define the commercial terms for this purchase order</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+<h4 class="font-medium text-gray-800 mb-4">Payment &amp; Delivery</h4>
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 required-field" for="paymentTerms">Payment Terms</label>
+<select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="paymentTerms" required="">
+<option value="">Select Payment</option>
+<option value="net30">Net 30</option>
+<option value="net60">Net 60</option>
+<option value="advance">Advance</option>
+<option value="cod">COD</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 required-field" for="deliveryTerms">Delivery Terms (Incoterms)</label>
+<select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="deliveryTerms" required="">
+<option value="">Select Delivery Terms</option>
+<option value="FOB">FOB</option>
+<option value="EXW">EXW</option>
+<option value="CIF">CIF</option>
+<option value="DDP">DDP</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 required-field" for="shippingMethod">Shipping Method</label>
+<select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="shippingMethod" required="">
+<option value="">Select Shipping Method</option>
+<option value="air">Air</option>
+<option value="sea">Sea</option>
+<option value="ground">Ground</option>
+<option value="express">Express</option>
+</select>
+</div>
+</div>
+</div>
+<div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+<h4 class="font-medium text-gray-800 mb-4">Financial Details</h4>
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 required-field" for="currency">Currency</label>
+<select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="currency" required="">
+<option value="">Select Currency</option>
+<option value="USD">USD</option>
+<option value="EUR">EUR</option>
+<option value="JPY">JPY</option>
+<option value="CNY">CNY</option>
+<option value="INR">INR</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700" for="taxCode">Tax Code</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="taxCode" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700" for="taxRate">Tax Rate (%)</label>
+<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="taxRate" step="0.01" type="number"/>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 mb-6">
+<h4 class="font-medium text-gray-800 mb-4">Compliance &amp; Documentation</h4>
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-gray-700" for="attachments">Attachments</label>
+<div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+<div class="space-y-1 text-center">
+<div class="flex text-sm text-gray-600">
+<label class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none" for="file-upload">
+<span>Upload files</span>
+<input class="sr-only" id="file-upload" multiple="" name="file-upload" type="file"/>
+</label>
+<p class="pl-1">or drag and drop</p>
+</div>
+<p class="text-xs text-gray-500">
+                                                            PDF, DOC, XLS up to 10MB
+                                                        </p>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700" for="specialInstructions">Special Instructions</label>
+<textarea class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" id="specialInstructions" rows="3"></textarea>
+</div>
+<div class="flex items-center">
+<input class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" id="esdSensitive" type="checkbox"/>
+<label class="ml-2 block text-sm text-gray-700" for="esdSensitive">ESD Sensitive Components</label>
+</div>
+</div>
+</div>
+<div class="flex justify-between mt-6">
+<button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2" onclick="switchTab('parts')" type="button">
+<i class="fas fa-arrow-left mr-2"></i> Back
+                                        </button>
+<button class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" onclick="switchTab('review')" type="button">
+                                            Next: Review <i class="fas fa-arrow-right ml-2"></i>
+</button>
+</div>
+</div>
+<!-- Review Tab -->
+<div class="tab-content" id="review">
+<div class="mb-6">
+<h3 class="text-lg font-semibold text-gray-700">Review Purchase Order</h3>
+<p class="text-gray-600">Verify all details before submission</p>
+</div>
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
+<div class="p-4 border-b border-gray-200">
+<h4 class="font-medium text-gray-800">Purchase Order Summary</h4>
+</div>
+<div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<p class="text-sm text-gray-500">PO Number</p>
+<p class="font-medium" id="reviewPoNumber">PO-2023-001</p>
+</div>
+<div>
+<p class="text-sm text-gray-500">PO Date</p>
+<p class="font-medium" id="reviewPoDate">-</p>
+</div>
+<div>
+<p class="text-sm text-gray-500">Buyer</p>
+<p class="font-medium" id="reviewBuyer">-</p>
+</div>
+<div>
+<p class="text-sm text-gray-500">Supplier</p>
+<p class="font-medium" id="reviewSupplier">-</p>
+</div>
+<div>
+<p class="text-sm text-gray-500">Total Items</p>
+<p class="font-medium" id="reviewTotalItems">0</p>
+</div>
+<div>
+<p class="text-sm text-gray-500">Total Amount</p>
+<p class="font-medium" id="reviewTotalAmount">$0.00</p>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
+<div class="p-4 border-b border-gray-200">
+<h4 class="font-medium text-gray-800">Parts Summary</h4>
+</div>
+<div class="overflow-x-auto">
+<table class="min-w-full divide-y divide-gray-200">
+<thead class="bg-gray-50">
+<tr>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" scope="col">Part Number</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" scope="col">Description</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" scope="col">Qty</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" scope="col">Unit Price</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" scope="col">Total</th>
+</tr>
+</thead>
+<tbody class="bg-white divide-y divide-gray-200" id="reviewPartsBody">
+<!-- Parts will be added here -->
+</tbody>
+</table>
+</div>
+</div>
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
+<div class="p-4 border-b border-gray-200">
+<h4 class="font-medium text-gray-800">Terms Summary</h4>
+</div>
+<div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<p class="text-sm text-gray-500">Payment Terms</p>
+<p class="font-medium" id="reviewPaymentTerms">-</p>
+</div>
+<div>
+<p class="text-sm text-gray-500">Delivery Terms</p>
+<p class="font-medium" id="reviewDeliveryTerms">-</p>
+</div>
+<div>
+<p class="text-sm text-gray-500">Shipping Method</p>
+<p class="font-medium" id="reviewShippingMethod">-</p>
+</div>
+<div>
+<p class="text-sm text-gray-500">Currency</p>
+<p class="font-medium" id="reviewCurrency">-</p>
+</div>
+</div>
+</div>
+<div class="flex justify-between mt-6">
+<button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2" onclick="switchTab('terms')" type="button">
+<i class="fas fa-arrow-left mr-2"></i> Back
+                                        </button>
+<button class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2" id="submitPoBtn" type="button" onclick="submitPO()">
+                                            Submit PO <i class="fas fa-check ml-2"></i>
+</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section class="hidden" id="about">
+<h1>About PixelPetals</h1>
+<div class="about-content">
+<div class="about-card">
+<h3>Our Mission</h3>
+<p>PixelPetals is dedicated to providing cutting-edge inventory and procurement management solutions for the semiconductor industry. Our mission is to streamline supply chain operations and enhance efficiency through innovative technology.</p>
+</div>
+<div class="about-card">
+<h3>Features</h3>
+<ul class="list-disc pl-5 space-y-2">
+<li>Real-time inventory tracking</li>
+<li>Advanced purchase order management</li>
+<li>Comprehensive reporting and analytics</li>
+<li>Supplier relationship management</li>
+<li>Secure cloud-based platform</li>
+</ul>
+</div>
+<div class="about-card">
+<h3>Our Team</h3>
+<div class="team-member">
+<img alt="Team Member" src="https://randomuser.me/api/portraits/men/32.jpg"/>
+<div>
+<h4>Kevin</h4>
+<p class="text-sm text-gray-600">CEO &amp; Founder</p>
+</div>
+</div>
+<div class="team-member">
+<img alt="Team Member" src="https://randomuser.me/api/portraits/women/44.jpg"/>
+<div>
+<h4>Carolin</h4>
+<p class="text-sm text-gray-600">CTO</p>
+</div>
+</div>
+</div>
+<div class="about-card">
+<h3>Contact Us</h3>
+<p><i class="fas fa-envelope mr-2"></i> kevin@pixelpetals.com</p>
+<p class="mt-2"><i class="fas fa-phone mr-2"></i> 8438724672</p>
+<p class="mt-2"><i class="fas fa-map-marker-alt mr-2"></i> 123 Tech Park, Silicon Valley, CA</p>
+</div>
+</div>
+</section>
+
+<!-- Orders Section (Admin Only) -->
+<section class="hidden" id="orders">
+  <h1>Submitted Purchase Orders</h1>
+  <div class="card">
+    <div class="section-header">
+      <h2>All Purchase Orders</h2>
+      <div class="actions">
+        <input type="text" id="orderSearch" placeholder="Search orders..." oninput="filterOrders()">
+      </div>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="customer-table" id="ordersTable">
+        <thead>
+          <tr>
+            <th>PO Number</th>
+            <th>Buyer</th>
+            <th>Department</th>
+            <th>Supplier</th>
+            <th>Total Amount</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Orders will be injected here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+</div>
+<!-- Success Modal -->
+<div class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center hidden" id="successModal">
+<div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
+<div class="flex justify-center mb-4">
+<div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+<i class="fas fa-check text-green-600 text-3xl"></i>
+</div>
+</div>
+<h3 class="text-lg font-medium text-gray-900 text-center mb-2">Purchase Order Submitted Successfully!</h3>
+<p class="text-gray-500 text-center mb-6">Your PO has been created and sent to the supplier.</p>
+<div class="bg-gray-50 px-4 py-3 rounded-b-lg flex justify-center">
+<button class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" onclick="closeSuccessModal()" type="button">
+                    Done
+                </button>
+</div>
+</div>
+</div>
+<script>
+        // Global variables
+        const chartRefs = {};
+        
+        let inventoryData = [
+            { name: "Chip A", qty: 100, company: "Intel" },
+            { name: "Chip B", qty: 60, company: "Samsung" },
+            { name: "Chip C", qty: 80, company: "TSMC" }
+        ];
+
+        let parts = [];
+        let currentTab = 'basic';
+        let isAdmin = false;
+        let submittedOrders = [];
+
+        // Dashboard functions
+        function showSection(id) {
+            document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+            
+            // Special handling for orders section
+            if (id === 'orders' && !isAdmin) {
+                alert('Access denied: Only admins can view orders.');
+                showSection('dashboard');
+                return;
+            }
+            
+            // If showing orders section, render the table
+            if (id === 'orders') {
+                renderOrdersTable();
+            }
+        }
+
+        function toggleDropdown(toggleEl) {
+            const content = toggleEl.nextElementSibling;
+            content.classList.toggle('hidden');
+            toggleEl.querySelector('.arrow').textContent = content.classList.contains('hidden') ? '▾' : '▴';
+        }
+
+        function showInventorySection(view) {
+            showSection('inventory');
+            document.getElementById('inventoryAddView').classList.add('hidden');
+            document.getElementById('inventoryListView').classList.add('hidden');
+            document.getElementById('inventoryUpdateView').classList.add('hidden');
+            if (view === 'add') document.getElementById('inventoryAddView').classList.remove('hidden');
+            else if (view === 'list') {
+                document.getElementById('inventoryListView').classList.remove('hidden');
+                updateProductList();
+            }
+            else if (view === 'update') {
+                document.getElementById('inventoryUpdateView').classList.remove('hidden');
+                populateUpdateSelector();
+            }
+        }
+
+        function showPOMSSection(view) {
+            showSection('poms');
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('text-blue-600', 'border-blue-600');
+                btn.classList.add('text-gray-500');
+            });
+            
+            document.getElementById(view).classList.add('active');
+            document.querySelector(`.tab-btn[data-tab="${view}"]`).classList.remove('text-gray-500');
+            document.querySelector(`.tab-btn[data-tab="${view}"]`).classList.add('text-blue-600', 'border-blue-600');
+            
+            currentTab = view;
+            
+            if (view === 'review') {
+                updateReviewSummary();
+            }
+        }
+
+        function logout() {
+            document.querySelector("body").classList.remove("dashboard");
+            document.querySelector("body").classList.add("login-page");
+            document.getElementById("dashboardWrapper").style.display = "none";
+            document.querySelector(".container").style.display = "block";
+            showTab('user');
+        }
+
+        
+// Modify showInventorySection to restrict access based on role
+function showInventorySection(view) {
+    if (!isAdmin) {
+        alert('Access denied: Only admin can access the inventory.');
+        showSection('dashboard');
+        return;
+    }
+    showSection('inventory');
+    document.getElementById('inventoryAddView').classList.add('hidden');
+    document.getElementById('inventoryListView').classList.add('hidden');
+    document.getElementById('inventoryUpdateView').classList.add('hidden');
+    if (view === 'add') document.getElementById('inventoryAddView').classList.remove('hidden');
+    else if (view === 'list') {
+        document.getElementById('inventoryListView').classList.remove('hidden');
+        updateProductList();
+    }
+    else if (view === 'update') {
+        document.getElementById('inventoryUpdateView').classList.remove('hidden');
+        populateUpdateSelector();
+    }
+}
+
+// Add login validation methods to switch roles and show dashboard
+function validateUserLogin() {
+    const username = document.getElementById("userUsername").value.trim();
+    const pwd = document.getElementById("userPassword").value.trim();
+    const cpwd = document.getElementById("userConfirmPassword").value.trim();
+    if (!username || pwd !== cpwd) {
+        document.getElementById("userError").textContent = "Invalid credentials or password mismatch.";
+        return;
+    }
+    isAdmin = false;
+    document.getElementById("roleLabel").textContent = "Logged in as User";
+    document.body.classList.remove("login-page");
+    document.body.classList.add("dashboard");
+    document.querySelector(".container").style.display = "none";
+    document.getElementById("dashboardWrapper").style.display = "block";
+    showSection('dashboard');
+}
+
+function validateAdminLogin() {
+    const adminId = document.getElementById("adminId").value.trim();
+    const pwd = document.getElementById("adminPassword").value.trim();
+    const cpwd = document.getElementById("adminConfirmPassword").value.trim();
+    if (!adminId || pwd !== cpwd) {
+        document.getElementById("adminError").textContent = "Invalid credentials or password mismatch.";
+        return;
+    }
+    isAdmin = true;
+    document.getElementById("roleLabel").textContent = "Logged in as Admin";
+    document.body.classList.remove("login-page");
+    document.body.classList.add("dashboard");
+    document.querySelector(".container").style.display = "none";
+    document.getElementById("dashboardWrapper").style.display = "block";
+    showSection('dashboard');
+}
+
+// Inventory functions
+        document.getElementById('productForm').addEventListener('submit', e => {
+            e.preventDefault();
+            if (!confirm('Are you sure you want to add this product?')) return;
+            const name = document.getElementById('productName').value.trim();
+            const qty = parseInt(document.getElementById('productQuantity').value);
+            const company = document.getElementById('productCompany').value.trim();
+            if (!name || qty < 1 || !company) return;
+            inventoryData.push({ name, qty, company });
+            updateProductList();
+            updateInventoryCharts();
+            populateUpdateSelector();
+            document.getElementById('productForm').reset();
+        });
+
+        function updateProductList() {
+            const list = document.getElementById('productList');
+            list.innerHTML = '';
+            inventoryData.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.className = "flex justify-between items-center border p-2 rounded shadow-sm bg-gray-50 hover:bg-gray-100";
+                li.innerHTML = `
+                    <div class="flex justify-between items-center w-full">
+                        <span>${item.name} - ${item.qty} units (${item.company})</span>
+                        <button onclick="deleteProduct(${index})" class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">Delete</button>
+                    </div>
+                `;
+                list.appendChild(li);
+            });
+        }
+
+        function deleteProduct(index) {
+            if (confirm("Are you sure you want to delete this product?")) {
+                inventoryData.splice(index, 1);
+                updateProductList();
+                updateInventoryCharts();
+                populateUpdateSelector();
+            }
+        }
+        
+        function populateUpdateSelector() {
+            const selector = document.getElementById('updateProductSelector');
+            selector.innerHTML = '';
+            inventoryData.forEach((item, i) => {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.text = `${item.name} (${item.company})`;
+                selector.appendChild(opt);
+            });
+        }
+
+        document.getElementById('updateProductForm').addEventListener('submit', e => {
+            e.preventDefault();
+            if (!confirm('Are you sure you want to update this product?')) return;
+            const i = parseInt(document.getElementById('updateProductSelector').value);
+            const qty = parseInt(document.getElementById('updateProductQuantity').value);
+            const company = document.getElementById('updateProductCompany').value.trim();
+            if (!inventoryData[i] || qty < 1 || !company) return;
+            inventoryData[i].qty = qty;
+            inventoryData[i].company = company;
+            updateProductList();
+            updateInventoryCharts();
+            populateUpdateSelector();
+            document.getElementById('updateProductForm').reset();
+        });
+
+        function updateInventoryCharts() {
+            const labels = inventoryData.map(p => p.name);
+            const data = inventoryData.map(p => p.qty);
+            
+            if (chartRefs.inventoryBarChart) {
+                chartRefs.inventoryBarChart.data.labels = labels;
+                chartRefs.inventoryBarChart.data.datasets[0].data = data;
+                chartRefs.inventoryBarChart.update();
+            }
+            
+            if (chartRefs.inventoryPieChart) {
+                chartRefs.inventoryPieChart.data.labels = labels;
+                chartRefs.inventoryPieChart.data.datasets[0].data = data;
+                chartRefs.inventoryPieChart.update();
+            }
+        }
+
+        // POMS functions
+        function toggleSection(element) {
+            const section = element.parentElement;
+            section.classList.toggle('collapsed');
+            const icon = element.querySelector('i');
+            if (section.classList.contains('collapsed')) {
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            } else {
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            }
+        }
+
+        function switchTab(tabId) {
+            // Validate current tab before switching
+            if (currentTab === 'basic' && !validateBasicInfo()) {
+                return;
+            } else if (currentTab === 'parts' && tabId === 'terms' && parts.length === 0) {
+                alert('Please add at least one part before proceeding.');
+                return;
+            } else if (currentTab === 'terms' && !validateTerms()) {
+                return;
+            }
+
+            // Hide current tab
+            document.getElementById(currentTab).classList.remove('active');
+            document.querySelector(`.tab-btn[data-tab="${currentTab}"]`).classList.remove('text-blue-600', 'border-blue-600');
+            document.querySelector(`.tab-btn[data-tab="${currentTab}"]`).classList.add('text-gray-500');
+
+            // Show new tab
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`.tab-btn[data-tab="${tabId}"]`).classList.remove('text-gray-500');
+            document.querySelector(`.tab-btn[data-tab="${tabId}"]`).classList.add('text-blue-600', 'border-blue-600');
+
+            // Update current tab
+            currentTab = tabId;
+
+            // If switching to review tab, update the review summary
+            if (tabId === 'review') {
+                updateReviewSummary();
+            }
+        }
+
+        function validateBasicInfo() {
+            const requiredFields = [
+                'poDate', 'orderType', 'buyerName', 'department', 'buyerEmail',
+                'deliveryAddress', 'supplierName', 'contactPerson', 'supplierEmail', 'supplierAddress'
+            ];
+
+            let isValid = true;
+
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (!field.value.trim()) {
+                    field.classList.add('border-red-500');
+                    isValid = false;
+                } else {
+                    field.classList.remove('border-red-500');
+                }
+            });
+
+            if (!isValid) {
+                alert('Please fill in all required fields marked with *');
+            }
+
+            return isValid;
+        }
+
+        function validateTerms() {
+            const requiredFields = [
+                'paymentTerms', 'deliveryTerms', 'shippingMethod', 'currency'
+            ];
+
+            let isValid = true;
+
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (!field.value.trim()) {
+                    field.classList.add('border-red-500');
+                    isValid = false;
+                } else {
+                    field.classList.remove('border-red-500');
+                }
+            });
+
+            if (!isValid) {
+                alert('Please fill in all required fields in Terms section');
+            }
+
+            return isValid;
+        }
+
+        function addPart() {
+            // Get all part details
+            const partNumber = document.getElementById('partNumber').value.trim();
+            const manufacturer = document.getElementById('manufacturer').value.trim();
+            const description = document.getElementById('description').value.trim();
+            const moq = document.getElementById('moq').value.trim();
+            const leadTime = document.getElementById('leadTime').value.trim();
+            const quantity = document.getElementById('quantity').value.trim();
+            const uom = document.getElementById('uom').value.trim();
+            const unitPrice = document.getElementById('unitPrice').value.trim();
+            const deliveryDate = document.getElementById('deliveryDate').value.trim();
+            const batchInfo = document.getElementById('batchInfo').value.trim();
+            const rohsCompliance = document.getElementById('rohsCompliance').checked;
+            const processNode = document.getElementById('processNode').value.trim();
+            const packagingType = document.getElementById('packagingType').value.trim();
+            const testSpec = document.getElementById('testSpec').value.trim();
+            const datasheetLink = document.getElementById('datasheetLink').value.trim();
+
+            // Validate required fields
+            if (!partNumber || !manufacturer || !moq || !leadTime || !quantity || !uom || !unitPrice || !deliveryDate) {
+                alert('Please fill in all required fields for the part');
+                return;
+            }
+
+            // Calculate total price
+            const totalPrice = (parseFloat(quantity) * parseFloat(unitPrice)).toFixed(2);
+
+            // Create part object
+            const part = {
+                id: Date.now(), // Unique ID for the part
+                partNumber,
+                manufacturer,
+                description,
+                moq,
+                leadTime,
+                quantity,
+                uom,
+                unitPrice,
+                totalPrice,
+                deliveryDate,
+                batchInfo,
+                rohsCompliance,
+                processNode,
+                packagingType,
+                testSpec,
+                datasheetLink
+            };
+
+            // Add to parts array
+            parts.push(part);
+
+            // Add part to UI
+            addPartToUI(part);
+
+            // Clear the form
+            clearPartForm();
+
+            // Scroll to the new part
+            const partElement = document.getElementById(`part-${part.id}`);
+            partElement.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function addPartToUI(part) {
+            const partItem = document.createElement('div');
+            partItem.id = `part-${part.id}`;
+            partItem.className = 'part-item bg-white p-4 rounded-lg shadow-sm border border-gray-200';
+
+            partItem.innerHTML = `
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h4 class="font-medium text-blue-700">${part.partNumber}</h4>
+                        <p class="text-sm text-gray-600">${part.manufacturer}${part.description ? ' - ' + part.description : ''}</p>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button onclick="editPart(${part.id})" class="text-blue-600 hover:text-blue-800">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button onclick="removePart(${part.id})" class="text-red-600 hover:text-red-800">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div>
+                        <p class="text-xs text-gray-500">MOQ</p>
+                        <p class="font-medium">${part.moq}</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500">Lead Time</p>
+                        <p class="font-medium">${part.leadTime} days</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500">Quantity</p>
+                        <p class="font-medium">${part.quantity} ${part.uom}</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500">Unit Price</p>
+                        <p class="font-medium">$${parseFloat(part.unitPrice).toFixed(2)}</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500">Total Price</p>
+                        <p class="font-medium">$${part.totalPrice}</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500">Delivery Date</p>
+                        <p class="font-medium">${formatDate(part.deliveryDate)}</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500">RoHS/REACH</p>
+                        <p class="font-medium">${part.rohsCompliance ? 'Yes' : 'No'}</p>
+                    </div>
+                </div>
+                ${part.processNode || part.packagingType || part.testSpec || part.datasheetLink ? `
+                <div class="mt-4 pt-4 border-t border-gray-200">
+                    <h5 class="text-sm font-medium text-gray-700 mb-2">Additional Info</h5>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        ${part.processNode ? `
+                        <div>
+                            <p class="text-xs text-gray-500">Process Node</p>
+                            <p class="font-medium">${part.processNode}</p>
+                        </div>
+                        ` : ''}
+                        ${part.packagingType ? `
+                        <div>
+                            <p class="text-xs text-gray-500">Packaging</p>
+                            <p class="font-medium">${part.packagingType}</p>
+                        </div>
+                        ` : ''}
+                        ${part.testSpec ? `
+                        <div>
+                            <p class="text-xs text-gray-500">Test Spec</p>
+                            <p class="font-medium">${part.testSpec}</p>
+                        </div>
+                        ` : ''}
+                        ${part.datasheetLink ? `
+                        <div class="col-span-2">
+                            <p class="text-xs text-gray-500">Datasheet</p>
+                            <a href="${part.datasheetLink}" target="_blank" class="text-blue-600 hover:underline">View Datasheet</a>
+                        </div>
+                        ` : ''}
+                    </div>
+                </div>
+                ` : ''}
+            `;
+
+            document.getElementById('partItemsContainer').appendChild(partItem);
+        }
+
+        function removePart(partId) {
+            if (confirm('Are you sure you want to remove this part?')) {
+                // Remove from array
+                parts = parts.filter(part => part.id !== partId);
+                
+                // Remove from UI
+                const partElement = document.getElementById(`part-${partId}`);
+                if (partElement) {
+                    partElement.remove();
+                }
+            }
+        }
+
+        function editPart(partId) {
+            const part = parts.find(p => p.id === partId);
+            if (!part) return;
+
+            // Fill the form with part details
+            document.getElementById('partNumber').value = part.partNumber;
+            document.getElementById('manufacturer').value = part.manufacturer;
+            document.getElementById('description').value = part.description || '';
+            document.getElementById('moq').value = part.moq;
+            document.getElementById('leadTime').value = part.leadTime;
+            document.getElementById('quantity').value = part.quantity;
+            document.getElementById('uom').value = part.uom;
+            document.getElementById('unitPrice').value = part.unitPrice;
+            document.getElementById('deliveryDate').value = part.deliveryDate;
+            document.getElementById('batchInfo').value = part.batchInfo || '';
+            document.getElementById('rohsCompliance').checked = part.rohsCompliance;
+            document.getElementById('processNode').value = part.processNode || '';
+            document.getElementById('packagingType').value = part.packagingType || '';
+            document.getElementById('testSpec').value = part.testSpec || '';
+            document.getElementById('datasheetLink').value = part.datasheetLink || '';
+
+            // Remove the part from the array and UI
+            removePart(partId);
+
+            // Scroll to the form
+            document.getElementById('partNumber').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function clearPartForm() {
+            document.getElementById('partNumber').value = '';
+            document.getElementById('description').value = '';
+            document.getElementById('moq').value = '';
+            document.getElementById('leadTime').value = '';
+            document.getElementById('quantity').value = '';
+            document.getElementById('unitPrice').value = '';
+            document.getElementById('batchInfo').value = '';
+            document.getElementById('rohsCompliance').checked = false;
+            document.getElementById('processNode').value = '';
+            document.getElementById('packagingType').value = '';
+            document.getElementById('testSpec').value = '';
+            document.getElementById('datasheetLink').value = '';
+        }
+
+        function updateReviewSummary() {
+            // Basic info
+            document.getElementById('reviewPoNumber').textContent = document.getElementById('poNumber').value;
+            document.getElementById('reviewPoDate').textContent = formatDate(document.getElementById('poDate').value);
+            document.getElementById('reviewBuyer').textContent = `${document.getElementById('buyerName').value} (${document.getElementById('department').value})`;
+            document.getElementById('reviewSupplier').textContent = document.getElementById('supplierName').value;
+            
+            // Parts summary
+            const reviewPartsBody = document.getElementById('reviewPartsBody');
+            reviewPartsBody.innerHTML = '';
+            
+            let totalAmount = 0;
+            
+            parts.forEach(part => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${part.partNumber}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${part.description || '-'}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${part.quantity} ${part.uom}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$${parseFloat(part.unitPrice).toFixed(2)}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$${part.totalPrice}</td>
+                `;
+                reviewPartsBody.appendChild(row);
+                
+                totalAmount += parseFloat(part.totalPrice);
+            });
+            
+            document.getElementById('reviewTotalItems').textContent = parts.length;
+            document.getElementById('reviewTotalAmount').textContent = `$${totalAmount.toFixed(2)}`;
+            
+            // Terms summary
+            document.getElementById('reviewPaymentTerms').textContent = document.getElementById('paymentTerms').options[document.getElementById('paymentTerms').selectedIndex].text;
+            document.getElementById('reviewDeliveryTerms').textContent = document.getElementById('deliveryTerms').options[document.getElementById('deliveryTerms').selectedIndex].text;
+            document.getElementById('reviewShippingMethod').textContent = document.getElementById('shippingMethod').options[document.getElementById('shippingMethod').selectedIndex].text;
+            document.getElementById('reviewCurrency').textContent = document.getElementById('currency').options[document.getElementById('currency').selectedIndex].text;
+        }
+
+        function submitPO() {
+            if (parts.length === 0) {
+                alert('Please add at least one part before submitting the PO');
+                return;
+            }
+
+            const po = {
+                id: Date.now(),
+                number: document.getElementById('poNumber').value,
+                buyer: document.getElementById('buyerName').value,
+                department: document.getElementById('department').value,
+                supplier: document.getElementById('supplierName').value,
+                amount: document.getElementById('reviewTotalAmount').textContent,
+                status: 'submitted',
+                date: formatDate(document.getElementById('poDate').value),
+                submittedDate: new Date().toLocaleDateString(),
+                parts: [...parts],
+                terms: {
+                    payment: document.getElementById('paymentTerms').value,
+                    delivery: document.getElementById('deliveryTerms').value,
+                    shipping: document.getElementById('shippingMethod').value,
+                    currency: document.getElementById('currency').value
+                }
+            };
+            
+            submittedOrders.push(po);
+            renderOrdersTable();
+
+            // Show success modal
+            document.getElementById('successModal').classList.remove('hidden');
+        }
+
+        function renderOrdersTable() {
+            const tbody = document.querySelector('#ordersTable tbody');
+            tbody.innerHTML = '';
+
+            if (!isAdmin) {
+                document.getElementById('orders').classList.add('hidden');
+                return;
+            }
+
+            submittedOrders.forEach((order, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${order.number}</td>
+                    <td>${order.buyer}</td>
+                    <td>${order.department}</td>
+                    <td>${order.supplier}</td>
+                    <td>${order.amount}</td>
+                    <td>${order.date}</td>
+                    <td>
+                        <span class="status-badge status-${order.status}">${order.status}</span>
+                    </td>
+                    <td>
+                        <div class="flex gap-2">
+                            <select class="text-sm p-1 rounded border" onchange="updateOrderStatus(${index}, this.value)">
+                                <option value="submitted" ${order.status === 'submitted' ? 'selected' : ''}>Submitted</option>
+                                <option value="approved" ${order.status === 'approved' ? 'selected' : ''}>Approved</option>
+                                <option value="pending" ${order.status === 'pending' ? 'selected' : ''}>Pending</option>
+                                <option value="received" ${order.status === 'received' ? 'selected' : ''}>Received</option>
+                                <option value="cancelled" ${order.status === 'cancelled' ? 'selected' : ''}>Cancelled</option>
+                            </select>
+                            <button class="text-blue-600 hover:text-blue-800 text-sm" onclick="viewOrderDetails(${index})">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function updateOrderStatus(index, newStatus) {
+            submittedOrders[index].status = newStatus;
+            renderOrdersTable();
+        }
+
+        function viewOrderDetails(index) {
+            const order = submittedOrders[index];
+            let partsHtml = '';
+            
+            order.parts.forEach(part => {
+                partsHtml += `
+                    <tr>
+                        <td class="px-4 py-2">${part.partNumber}</td>
+                        <td class="px-4 py-2">${part.manufacturer}</td>
+                        <td class="px-4 py-2">${part.quantity} ${part.uom}</td>
+                        <td class="px-4 py-2">$${part.unitPrice}</td>
+                        <td class="px-4 py-2">$${part.totalPrice}</td>
+                    </tr>
+                `;
+            });
+            
+            alert(`
+                Purchase Order Details
+                ----------------------
+                PO Number: ${order.number}
+                Buyer: ${order.buyer}
+                Department: ${order.department}
+                Supplier: ${order.supplier}
+                Total Amount: ${order.amount}
+                Status: ${order.status}
+                Date: ${order.date}
+                
+                Parts:
+                ${partsHtml ? `
+                <table class="min-w-full mt-4">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2 text-left">Part #</th>
+                            <th class="px-4 py-2 text-left">Manufacturer</th>
+                            <th class="px-4 py-2 text-left">Qty</th>
+                            <th class="px-4 py-2 text-left">Unit Price</th>
+                            <th class="px-4 py-2 text-left">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${partsHtml}
+                    </tbody>
+                </table>
+                ` : 'No parts found'}
+            `);
+        }
+
+        function filterOrders() {
+            const searchTerm = document.getElementById('orderSearch').value.toLowerCase();
+            const rows = document.querySelectorAll('#ordersTable tbody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.add('hidden');
+            
+            // Reset the form and PO details
+            document.getElementById('poForm').reset();
+            parts = [];
+            document.getElementById('partItemsContainer').innerHTML = '';
+            document.getElementById('reviewPartsBody').innerHTML = '';
+            switchTab('basic');
+            
+            // Generate a new PO number
+            const randomNum = Math.floor(Math.random() * 1000);
+            document.getElementById('poNumber').value = `PO-${new Date().getFullYear()}-${randomNum.toString().padStart(3, '0')}`;
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return '-';
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString(undefined, options);
+        }
+
+        function initializeCharts() {
+            // Cash flow chart
+            chartRefs.inventoryChart = new Chart(document.getElementById('inventoryChart'), {
+                type: 'line',
+                data: {
+                    labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+                    datasets: [{ 
+                        label: 'Cash Flow', 
+                        data: [22000,18000,21000,24000,19000,23000,25000,27000,22000,25000,26000,32000], 
+                        borderColor: '#4a6cf7', 
+                        backgroundColor: 'rgba(74, 108, 247, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                }
+            });
+            
+            // Inventory bar chart
+            chartRefs.inventoryBarChart = new Chart(document.getElementById('inventoryBarChart'), {
+                type: 'bar',
+                data: { 
+                    labels: [], 
+                    datasets: [{ 
+                        label: 'Inventory Units', 
+                        data: [], 
+                        backgroundColor: '#4a6cf7' 
+                    }] 
+                },
+                options: { 
+                    responsive: true,
+                    scales: { 
+                        y: { 
+                            beginAtZero: true 
+                        } 
+                    } 
+                }
+            });
+            
+            // Inventory pie chart
+            chartRefs.inventoryPieChart = new Chart(document.getElementById('inventoryPieChart'), {
+                type: 'pie',
+                data: { 
+                    labels: [], 
+                    datasets: [{ 
+                        data: [], 
+                        backgroundColor: ['#4a6cf7', '#34c38f', '#f46a6a', '#f1b44c', '#50a5f1', '#ffc107'] 
+                    }] 
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                        }
+                    }
+                }
+            });
+        }
+
+        // Login functions
+        function showTab(tab) {
+            document.getElementById('userTab').style.display = 'none';
+            document.getElementById('adminTab').style.display = 'none';
+            document.getElementById(tab + 'Tab').style.display = 'block';
+        }
+
+        function validateUserLogin() {
+            const username = document.getElementById('userUsername').value.trim();
+            const password = document.getElementById('userPassword').value.trim();
+            const confirmPassword = document.getElementById('userConfirmPassword').value.trim();
+            const company = document.getElementById('userCompany').value.trim();
+            const errorDiv = document.getElementById('userError');
+            errorDiv.textContent = '';
+            
+            if (!username || !password || !confirmPassword || !company) {
+                errorDiv.textContent = 'Please fill in all fields.';
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                errorDiv.textContent = 'Passwords do not match.';
+                return;
+            }
+            
+            // Successful login
+            isAdmin = false;
+            launchDashboard();
+        }
+
+        function validateAdminLogin() {
+            const name = document.getElementById('adminName').value.trim();
+            const id = document.getElementById('adminId').value.trim();
+            const password = document.getElementById('adminPassword').value.trim();
+            const confirmPassword = document.getElementById('adminConfirmPassword').value.trim();
+            const company = document.getElementById('adminCompany').value.trim();
+            const errorDiv = document.getElementById('adminError');
+            errorDiv.textContent = '';
+            
+            if (!name || !id || !password || !confirmPassword || !company) {
+                errorDiv.textContent = 'Please fill in all fields.';
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                errorDiv.textContent = 'Passwords do not match.';
+                return;
+            }
+            
+            // Successful login
+            isAdmin = true;
+            launchDashboard();
+        }
+
+        function launchDashboard() {
+            document.querySelector(".container").style.display = "none";
+            document.getElementById("dashboardWrapper").style.display = "block";
+            document.querySelector("body").classList.remove("login-page");
+            document.querySelector("body").classList.add("dashboard");
+            
+            // Initialize the dashboard
+            initializeDashboard();
+            applyAccessControl();
+        }
+
+        function applyAccessControl() {
+            const addView = document.getElementById('inventoryAddView');
+            const updateView = document.getElementById('inventoryUpdateView');
+            const listView = document.getElementById('inventoryListView');
+            const cashCard = document.getElementById('cashFlowCard');
+            const poStatusWrap = document.getElementById('poStatusWrapper');
+            const ordersSection = document.getElementById('orders');
+
+            const tabButtons = document.querySelectorAll('.tab-btn[data-tab]');
+            tabButtons.forEach(btn => {
+                if (!isAdmin && (btn.dataset.tab === 'terms' || btn.dataset.tab === 'review')) {
+                    btn.style.display = 'none';
+                } else {
+                    btn.style.display = '';
+                }
+            });
+
+            if (isAdmin) {
+                if (addView) addView.classList.remove('hidden');
+                if (updateView) updateView.classList.remove('hidden');
+                if (listView) listView.classList.remove('hidden');
+                if (cashCard) cashCard.classList.remove('hidden');
+                if (poStatusWrap) poStatusWrap.style.display = '';
+                if (ordersSection) ordersSection.classList.remove('hidden');
+            } else {
+                if (addView) addView.classList.add('hidden');
+                if (updateView) updateView.classList.add('hidden');
+                if (listView) listView.classList.add('hidden');
+                if (cashCard) cashCard.classList.add('hidden');
+                if (poStatusWrap) poStatusWrap.style.display = 'none';
+                if (ordersSection) ordersSection.classList.add('hidden');
+            }
+
+            document.getElementById('roleLabel').textContent = isAdmin ? 'Admin' : 'User';
+
+            if (!isAdmin) {
+                const inventoryDropdown = document.querySelectorAll('.dropdown .dropdown-content')[0];
+                const inventoryLinks = inventoryDropdown?.querySelectorAll('a') || [];
+                if (inventoryLinks[0]) inventoryLinks[0].style.display = 'none';
+                if (inventoryLinks[2]) inventoryLinks[2].style.display = 'none';
+
+                const inventoryNav = Array.from(document.querySelectorAll('.sidebar nav a')).find(el => el.textContent.includes('Inventory'));
+                if (inventoryNav) inventoryNav.style.display = 'none';
+            }
+        }
+
+        function initializeDashboard() {
+            lucide.createIcons();
+            initializeCharts();
+            showSection('dashboard');
+            
+            // Set today's date as default for POMS
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('poDate').value = today;
+            document.getElementById('deliveryDate').valueAsDate = new Date();
+            
+            // Generate a random PO number if not already set
+            if (!document.getElementById('poNumber').value) {
+                const randomNum = Math.floor(Math.random() * 1000);
+                document.getElementById('poNumber').value = `PO-${new Date().getFullYear()}-${randomNum.toString().padStart(3, '0')}`;
+            }
+            
+            // Add event listeners for POMS
+            document.getElementById('addPartBtn').addEventListener('click', addPart);
+            document.getElementById('submitPoBtn').addEventListener('click', submitPO);
+            
+            // Initialize tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    switchTab(this.dataset.tab);
+                });
+            });
+            
+            // Update current time
+            updateCurrentTime();
+            setInterval(updateCurrentTime, 1000);
+            
+            // Initialize product list
+            updateProductList();
+            updateInventoryCharts();
+            populateUpdateSelector();
+        }
+
+        function updateCurrentTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            const dateString = now.toLocaleDateString();
+            document.getElementById('currentTime').textContent = `${dateString} ${timeString}`;
+        }
+
+        // Initialize the login page
+        window.onload = function() {
+            showTab('user');
+            updateCurrentTime();
+            setInterval(updateCurrentTime, 1000);
+        };
+    
+// DOM-based PO status update and view (no storage or API)
+function adminSetStatus(poNumber, status) {
+    const statusDiv = document.getElementById('poStatusStore');
+    statusDiv.setAttribute('data-po', poNumber);
+    statusDiv.setAttribute('data-status', status);
+    alert(`Admin: PO ${poNumber} status set to ${status}`);
+}
+
+function userGetStatus(poNumber) {
+    const statusDiv = document.getElementById('poStatusStore');
+    if (statusDiv.getAttribute('data-po') === poNumber) {
+        alert(`User: Status of PO ${poNumber} is ${statusDiv.getAttribute('data-status')}`);
+    } else {
+        alert('PO not found or status not set.');
+    }
+}
+
+</script>
+</body>
+</html>
